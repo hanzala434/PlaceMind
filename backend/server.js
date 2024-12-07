@@ -17,6 +17,9 @@ app.listen(process.env.PORT || 5000, () => {
   console.log(`Server running on port ${process.env.PORT || 5000}`);
 });
 
+//routes
+app.use('/api/tasks',require('./Routes/TaskRoutes'));
+
 const webpush = require('web-push');
 webpush.setVapidDetails(
   'mailto:your-email@example.com',
