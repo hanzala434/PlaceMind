@@ -20,20 +20,20 @@ app.listen(process.env.PORT || 5000, () => {
 //routes
 app.use('/api/tasks',require('./Routes/TaskRoutes'));
 
-const webpush = require('web-push');
-webpush.setVapidDetails(
-  'mailto:your-email@example.com',
-  process.env.VAPID_PUBLIC_KEY,
-  process.env.VAPID_PRIVATE_KEY
-);
+// const webpush = require('web-push');
+// webpush.setVapidDetails(
+//   'mailto:your-email@example.com',
+//   process.env.VAPID_PUBLIC_KEY,
+//   process.env.VAPID_PRIVATE_KEY
+// );
 
-const twilio = require('twilio');
-const client = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
+// const twilio = require('twilio');
+// const client = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
-const sendCall = (to, message) => {
-  client.calls.create({
-    to,
-    from: process.env.TWILIO_PHONE_NUMBER,
-    twiml: `<Response><Say>${message}</Say></Response>`
-  });
-};
+// const sendCall = (to, message) => {
+//   client.calls.create({
+//     to,
+//     from: process.env.TWILIO_PHONE_NUMBER,
+//     twiml: `<Response><Say>${message}</Say></Response>`
+//   });
+// };
