@@ -10,7 +10,7 @@ const MainSection = () => {
   //  console.log(tasks)
   useEffect(()=>{
     dispatch(fetchTasksByUserId(userId))
-  })
+  },[dispatch])
     return (
      <section className='mt-5'>
       <div className='m-4 bg-slate-950'>
