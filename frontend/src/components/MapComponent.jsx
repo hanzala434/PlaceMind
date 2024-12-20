@@ -86,7 +86,7 @@ const MapComponent = ({tasks}) => {
 
         // Initialize socket connection
         try {
-            socket.current = io("https://place-mind-v49h.vercel.app/", {
+            socket.current = io(process.env.REACT_APP_API, {
               transports: ["websocket", "polling"]}); // Update with your backend URL
 
             // Trigger location fetch every 5 seconds
