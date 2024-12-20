@@ -12,7 +12,7 @@ const io = socketio(server, {
     //https://place-mind-qa3v.vercel.app/
     origin: "https://place-mind.vercel.app", // Allow requests from React frontend
 
-    // origin: "http://localhost:3000", // Allow requests from React frontend
+    //origin: "http://localhost:3000", // Allow requests from React frontend
     methods: ["GET", "POST"],
   },
 });

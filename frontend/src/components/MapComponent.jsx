@@ -70,15 +70,17 @@ const MapComponent = ({tasks}) => {
 
     useEffect(() => {
         try {
-            // Initialize the map
-            const map = L.map('map').setView([0, 0], 10);
-            L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-                attribution: "Place Mind",
-            }).addTo(map);
-            mapRef.current = map; // Assign map instance to ref
-            // Center map on the user's location on page load
-            getLocation(true);
-       
+            // Check if map is already initialized
+            if (!mapRef.current) {
+                const map = L.map('map').setView([0, 0], 10);
+                L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+                    attribution: "Place Mind",
+                }).addTo(map);
+                mapRef.current = map; // Assign map instance to ref
+    
+                // Center map on the user's location on page load
+                getLocation(true);
+            }
         } catch (error) {
             console.error("Error initializing Leaflet map:", error);
         }
