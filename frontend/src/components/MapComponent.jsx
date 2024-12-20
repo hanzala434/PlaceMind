@@ -86,7 +86,7 @@ const MapComponent = ({tasks}) => {
 
         // Initialize socket connection
         try {
-            socket.current = io("https://place-mind-v49h.vercel.app"); // Update with your backend URL
+            socket.current = io("https://place-mind-v49h.vercel.app/"); // Update with your backend URL
 
             // Trigger location fetch every 5 seconds
             const locationInterval = setInterval(getLocation, 5000);
