@@ -77,7 +77,7 @@ const MapComponent = ({tasks}) => {
 
     useEffect(() => {
         try {
-<<<<<<< HEAD
+
             // Check if map is already initialized
             if (!mapRef.current) {
                 const map = L.map('map').setView([0, 0], 10);
@@ -88,7 +88,7 @@ const MapComponent = ({tasks}) => {
     
                 // Center map on the user's location on page load
                 getLocation(true);
-=======
+
             // Initialize the map
             if (!mapRef.current) {
             const map = L.map('map').setView([0, 0], 10);
@@ -98,7 +98,7 @@ const MapComponent = ({tasks}) => {
             mapRef.current = map; // Assign map instance to ref
             // Center map on the user's location on page load
             getLocation(true);
->>>>>>> fc525949000882d657ca5df0891019988db49c09
+          }
             }
         } catch (error) {
             console.error("Error initializing Leaflet map:", error);
@@ -106,12 +106,9 @@ const MapComponent = ({tasks}) => {
 
         // Initialize socket connection
         try {
-<<<<<<< HEAD
             socket.current = io(process.env.REACT_APP_API); // Update with your backend URL
-=======
             socket.current = io(process.env.REACT_APP_API, {
               transports: ["websocket", "polling"]}); // Update with your backend URL
->>>>>>> fc525949000882d657ca5df0891019988db49c09
 
             // Trigger location fetch every 5 seconds
             const locationInterval = setInterval(getLocation, 5000);
