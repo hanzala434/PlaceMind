@@ -1,6 +1,9 @@
 import React from 'react'
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { logout,reset } from '../../features/auth/authSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 const navigation = [
   { name: 'Dashboard', href: '#', current: true },
@@ -13,6 +16,14 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 const Header = () => {
+  const dispatch=useDispatch()
+  const navigate=useNavigate()
+  const {user}=useSelector((state)=>state.auth)
+
+  const onLogOut=()=>{
+    navigate('/');
+    dispatch(logout())
+  }
   return (
     <>
       <Disclosure as="nav" className="bg-gray-800">
@@ -54,6 +65,27 @@ const Header = () => {
             </div>
           </div>
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+          {user?(    
+        <div className=" lg:flex lg:flex-1 lg:justify-end">
+        <button onClick={onLogOut} className="text-sm/6 font-semibold text-slate-50">
+          Logout <span aria-hidden="true">&rarr;</span>
+        </button>
+        
+      </div>
+    ):(
+      <>
+      <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+      <a href="/register" className="text-sm/6 font-semibold text-gray-50">
+        Register-Now
+      </a>
+    </div>
+     <div className="ml-3">
+        <a href="/" className="text-sm/6 font-semibold text-gray-50">
+          Log in
+        </a>
+      </div>
+    </>
+    )}
             <button
               type="button"
               className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"

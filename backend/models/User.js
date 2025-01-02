@@ -7,8 +7,8 @@ const UserSchema = new mongoose.Schema({
   phone: { type: String },
   preferredAlertType: { type: String, enum: ['notification', 'call', 'both'], default: 'notification' },
   homeLocation: {
-    latitude: { type: Number },
-    longitude: { type: Number },
+    latitude: { type: Number ,default:0},
+    longitude: { type: Number ,default:0},
   },
   defaultRadius: { type: Number, default: 100 },
   notificationEnabled: { type: Boolean, default: true },

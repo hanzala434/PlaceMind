@@ -5,9 +5,9 @@ const jwt = require('jsonwebtoken');
 
 // Create a new user (Register)
 const registerUser = asyncHandler(async (req, res) => {
-    const { name, email, password, phone, homeLocation, role, preferredAlertType } = req.body;
+    const { name, email, password, phone, role, preferredAlertType } = req.body;
 
-    if (!name || !email || !password || !phone || !homeLocation || !role || !preferredAlertType) {
+    if (!name || !email || !password || !phone || !role || !preferredAlertType) {
         res.status(400);
         throw new Error('Please add all fields');
     }
@@ -28,7 +28,7 @@ const registerUser = asyncHandler(async (req, res) => {
         email,
         password: hashedPassword,
         phone,
-        homeLocation,
+        
         role,
         preferredAlertType,
     });

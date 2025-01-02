@@ -9,9 +9,11 @@ const MapComponent = ({tasks}) => {
     const mapRef = useRef(null); // Map container
     const markers = useRef({}); // Store markers by user ID
     const socket = useRef(null); // Socket instance
-    const userId=useSelector((state)=>state.auth.user._id)
     const taskMarkers = useRef({}); // Store task markers by task ID
-    // console.log(userId);
+    const taskCircles = useRef({}); // Store circles by task ID
+    const {user}=useSelector((state)=>state.auth)
+
+    // console.log(user._id);
 
     const markerColors = [
         'red',
@@ -40,33 +42,38 @@ const MapComponent = ({tasks}) => {
     // Function to get the current location
     const getLocation = (centerMap = false) => {
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    const { latitude, longitude } = position.coords;
-                    console.log("Device Coordinates:", { latitude, longitude }); // Logs the coordinates
-                    
-                    if (centerMap && mapRef.current) {
-                        mapRef.current.setView([latitude, longitude], 13); // Adjust zoom level as needed
-                    }
-                    
-                    if (socket.current) {
-                        socket.current.emit("register-user", userId);
-                        socket.current.emit("send-location", { latitude, longitude });
-                    }
-                },
-                (error) => {
-                    console.error("Geolocation error:", error);
-                },
-                {
-                    enableHighAccuracy: true,
-                    timeout: 5000,
-                    maximumAge: 0,
-                }
-            );
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              const { latitude, longitude } = position.coords;
+              console.log("Device Coordinates:", { latitude, longitude }); // Logs the coordinates
+      
+              if (centerMap && mapRef.current) {
+                mapRef.current.setView([latitude, longitude], 13); // Adjust zoom level as needed
+              }
+      
+              if (socket.current) {
+                socket.current.emit("register-user", user._id);
+                socket.current.emit("send-location", { 
+                  latitude, 
+                  longitude, 
+                  phone: `${user.phone}` // Replace with actual user's phone number 
+                });
+              }
+            },
+            (error) => {
+              console.error("Geolocation error:", error);
+            },
+            {
+              enableHighAccuracy: true,
+              timeout: 5000,
+              maximumAge: 0,
+            }
+          );
         } else {
-            console.error("Geolocation is not supported by this browser.");
+          console.error("Geolocation is not supported by this browser.");
         }
-    };
+      };
+      
 
     useEffect(() => {
         try {
@@ -87,7 +94,7 @@ const MapComponent = ({tasks}) => {
 
         // Initialize socket connection
         try {
-            socket.current = io("https://place-mind-v49h.vercel.app"); // Update with your backend URL
+            socket.current = io(process.env.REACT_APP_API); // Update with your backend URL
 
             // Trigger location fetch every 5 seconds
             const locationInterval = setInterval(getLocation, 5000);
@@ -115,7 +122,7 @@ const MapComponent = ({tasks}) => {
 
             // Add markers for tasks
             tasks.forEach((task) => {
-                const { location, title, _id } = task;
+                const { location, title, _id ,radius} = task;
                 // Check if location object exists and contains valid lat and lng properties
                 if (location && location.lat && location.lng) {
                   const { lat, lng } = location; // Destructure lat and lng from location
@@ -134,6 +141,16 @@ const MapComponent = ({tasks}) => {
                     // Update the marker's position if it already exists
                     taskMarkers.current[_id].setLatLng([lat, lng]);
                   }
+                  if (!taskCircles.current[_id]) {
+                    taskCircles.current[_id] = L.circle([lat, lng], {
+                        radius: radius || 500, // Default radius if not provided
+                        color: 'blue',
+                        fillColor: '#3388ff',
+                        fillOpacity: 0.2,
+                    }).addTo(mapRef.current);
+                } else {
+                    taskCircles.current[_id].setLatLng([lat, lng]).setRadius(radius || 500);
+                }
                 }
               });
               
@@ -142,8 +159,13 @@ const MapComponent = ({tasks}) => {
                 Object.values(taskMarkers.current).forEach((marker) => {
                   mapRef.current.removeLayer(marker);
                 });
+                Object.values(taskCircles.current).forEach((circle) => {
+                    mapRef.current.removeLayer(circle);
+                });
                 taskMarkers.current = {}; // Clear markers reference
-              };
+                taskCircles.current = {};
+
+            };
         } catch (error) {
             console.error("Error with socket.io:", error);
         }
