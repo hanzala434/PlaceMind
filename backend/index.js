@@ -15,8 +15,13 @@ const io = socketio(server, {
      origin: "https://place-mind.vercel.app", // Allow requests from React frontend
 
     // origin: "http://localhost:3000", // Allow requests from React frontend
-    // methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods
-    // allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
+// <<<<<<< HEAD
+//     // methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods
+//     // allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
+// =======
+//     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods
+//     allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
+// >>>>>>> fc525949000882d657ca5df0891019988db49c09
   },
 });
 

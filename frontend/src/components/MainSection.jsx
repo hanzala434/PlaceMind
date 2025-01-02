@@ -12,6 +12,7 @@ const MainSection = () => {
   const tasks=useSelector((state)=>state.task.tasks)
   //  console.log(tasks)
   useEffect(()=>{
+<<<<<<< HEAD
     if(user){
 
       dispatch(fetchTasksByUserId(user._id))
@@ -24,6 +25,10 @@ const MainSection = () => {
   } 
 
 
+=======
+    dispatch(fetchTasksByUserId(userId))
+  },[dispatch])
+>>>>>>> fc525949000882d657ca5df0891019988db49c09
     return (
      <section className='mt-5'>
       <div className='m-4 bg-slate-950'>
