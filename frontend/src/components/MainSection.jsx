@@ -25,24 +25,24 @@ const MainSection = () => {
 
 
     return (
-     <section className='mt-5'>
+     <section className='mt-5 m-2'>
       <div className='m-4 bg-slate-950'>
       <MapComponent tasks={tasks} />
       </div>
 
-        <div className='mb-10 mt-8 flex flex-col w-2/3 p-8 bg-slate-950 rounded-2xl m-auto divide-y divide-gray-100'>
+        <div className='mb-10 mt-8 flex flex-col p-8 bg-slate-950 rounded-2xl m-auto divide-y divide-gray-100'>
         <h1 className='flex justify-center text-2xl text-white '>Your Tasks</h1>
-        <div className='m-2 p-2 flex justify-between lg:justify-center'>
+        <div className='m-2 p-2 flex justify-between '>
           <h1 className='text-white font-bold mx-1'>Title</h1>
           <h1 className='text-white font-bold'>Alert Type</h1>
           <h1 className='text-white font-bold'>Status</h1>
 
         </div>
-        <ul role='list' className="divide-y w-full divide-gray-100">
+        <ul role='list' className="divide-y w-full divide-gray-100 ">
           {tasks.map((task)=>(
 
             <li key={task._id}>
-              <div className='m-2 p-2 flex justify-between'>
+              <div className='m-2 p-2 flex justify-between flex-wrap '>
                 <div>
               <p className='text-white'>
               {task.title}

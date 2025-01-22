@@ -12,9 +12,9 @@ const Task = require('./models/Task');
 const client = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 const io = socketio(server, {
   cors: {
-      origin: "https://place-mind.vercel.app", // Allow requests from React frontend
+      // origin: "https://place-mind.vercel.app", // Allow requests from React frontend
 
-    // origin: "http://localhost:3000", // Allow requests from React frontend
+    //  origin: "http://localhost:3000", // Allow requests from React frontend
 // <<<<<<< HEAD
 //     // methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods
 //     // allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
@@ -181,6 +181,7 @@ app.use('/api/tasks',require('./Routes/TaskRoutes'));
 // } catch (error) {
 //   console.error('Error sending message:', error);
 // }
-server.listen(process.env.PORT || 5000, () => {
+server.listen(process.env.PORT || 5000,'0.0.0.0', () => {
   console.log(`Server running on port ${process.env.PORT || 5000}`);
 });
+
