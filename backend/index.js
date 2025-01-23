@@ -20,7 +20,7 @@ const io = socketio(server, {
 });
 
 connectDB();
-app.use(cors()); // Allow CORS for API routes
+app.use(cors({ origin: "https://place-mind.vercel.app"})); // Allow CORS for API routes
 app.use(express.json());
 
 // io.on("connection", (socket) => {
