@@ -12,7 +12,7 @@ const Task = require('./models/Task');
 const client = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 const io = socketio(server, {
   cors: {
-       origin: "https://place-mind.vercel.app",
+     origin: "https://place-mind.vercel.app",
 
     //  origin: "http://localhost:3000", // Allow requests from React frontend
 
@@ -21,6 +21,8 @@ const io = socketio(server, {
 
 connectDB();
 app.use(cors({ origin: "https://place-mind.vercel.app"})); // Allow CORS for API routes
+// app.use(cors({ origin: "http://localhost:3000"})); // Allow CORS for API routes
+
 app.use(express.json());
 
 // io.on("connection", (socket) => {
