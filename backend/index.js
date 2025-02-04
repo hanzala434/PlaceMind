@@ -14,7 +14,7 @@ const io = socketio(server, {
   cors: {
      origin: "https://place-mind.vercel.app",
 
-    //  origin: "http://localhost:3000", // Allow requests from React frontend
+   //   origin: "http://localhost:3000", // Allow requests from React frontend
 
   },
 });

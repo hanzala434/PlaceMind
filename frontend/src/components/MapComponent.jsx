@@ -13,7 +13,7 @@ const MapComponent = ({ tasks }) => {
   const { user } = useSelector((state) => state.auth);
 
   const customIcon = L.icon({
-    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
     iconSize: [32, 40],
     iconAnchor: [16, 32],
     popupAnchor: [0, -32],
@@ -73,7 +73,7 @@ const MapComponent = ({ tasks }) => {
       if (!mapRef.current) {
         const map = L.map('map').setView([0, 0], 10);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          attribution: 'Place Mind',
+          attribution: 'PlaceMind',
         }).addTo(map);
         mapRef.current = map;
 
@@ -147,7 +147,7 @@ const MapComponent = ({ tasks }) => {
     }
   }, [tasks]);
 
-  return <div id="map" style={{ height: '500px', width: '100%' }}></div>;
+  return <div id="map" style={{ height: '500px', width: '100%' }} ></div>;
 };
 
 export default MapComponent;

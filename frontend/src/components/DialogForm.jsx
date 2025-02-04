@@ -6,6 +6,8 @@ import MapComponent2 from './MapComponent2'
 import {useSelector,useDispatch} from 'react-redux'
 import { addTask,reset } from '../features/tasks/taskSlice'
 import { useNavigate } from 'react-router-dom'
+import {toast} from 'react-toastify'
+import "react-toastify/dist/ReactToastify.css";
 
 
 const DialogForm = () => {
@@ -54,8 +56,16 @@ const DialogForm = () => {
 
               }
               console.log(taskData)
-              dispatch(addTask(taskData))
-              navigate('/home')
+
+              if(!taskData){
+                toast('Complete all the fields')
+                navigate('/dialog')
+              }
+              else{
+
+                dispatch(addTask(taskData))
+                navigate('/home')
+              }
           }
       
 
