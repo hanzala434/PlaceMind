@@ -58,7 +58,7 @@ const DialogForm = () => {
               console.log(taskData)
 
               if(!taskData){
-                toast('Complete all the fields')
+                toast.error('Complete all the fields')
                 navigate('/dialog')
               }
               else{
